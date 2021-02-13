@@ -1,0 +1,24 @@
+[
+  {
+    "id": "price_1IIfrOCw9BKLw2d5zEPTYvfG",
+    "title": "Space Jelly Tshirt",
+    "description": "Cool ass tshirt",
+    "image": "/images/spacejelly-tshirt.jpg",
+    "price": 20.00
+  },
+  {
+    "id": "price_1IIft3Cw9BKLw2d5Gjadl73b",
+    "title": "Space Jelly Sticker",
+    "description": "Nice sticker",
+    "image": "/images/spacejelly-stickers.jpg",
+    "price": 10.00
+  },
+  {
+    "id": "price_1IIftYCw9BKLw2d5i1kiNaWn",
+    "title": "Space Jelly Combo",
+    "description": "Tshirt + stickers",
+    "image": "/images/spacejelly-combo.jpg",
+    "price": 30.00
+  }
+  
+]
