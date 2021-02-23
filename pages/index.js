@@ -1,12 +1,18 @@
 import Head from "next/head";
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import products from "../products.json";
-import {initiateCheckout} from "../lib/payments.js";
+import {FaShoppingCart} from "react-icons/fa";
+import {useCart} from "../hooks/use-cart";
+
 export default function Home() {
   console.log(
     "NEXT_PUBLIC_STRIPE_API_KEY",
     process.env.NEXT_PUBLIC_STRIPE_API_KEY
   );
+
+  const {subTotal, totalItems, addToCart, checkout} = useCart();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -19,32 +25,41 @@ export default function Home() {
 
         <p className={styles.description}>The best store evah!</p>
 
+        <p className={styles.cartDetails}>
+          <strong>Items: {totalItems}</strong>
+          <br />
+          <strong>Total Cost: {subTotal}$</strong>
+          <br />
+          <button
+            className={`${styles.button} ${styles.cartButton}`}
+            onClick={checkout}
+          >
+            <FaShoppingCart />
+            Checkout
+          </button>
+        </p>
+
         <ul className={styles.grid}>
           {products.map((product) => {
             const {id, title, description, image, price} = product;
             return (
               <li className={styles.card} key={id}>
-                <a href="#">
-                  <img src={image} alt={title} />
-                  <h3>{title}</h3>
-                  <p>{description}</p>
-                  <p>${price}</p>
-                </a>
+                <Link href={`products/${id}`}>
+                  <a>
+                    <img src={image} alt={title} />
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                    <p></p>
+                  </a>
+                </Link>
                 <p>
                   <button
                     className={styles.button}
                     onClick={() => {
-                      initiateCheckout({
-                        lineItems: [
-                          {
-                            price: id,
-                            quantity: 1,
-                          },
-                        ],
-                      });
+                      addToCart({id});
                     }}
                   >
-                    Buy now
+                    Add to cart
                   </button>
                 </p>
               </li>
